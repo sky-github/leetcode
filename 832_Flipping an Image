@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+class Solution {
+public:
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A){
+        int h = A.size();
+        int w = A[0].size();
+        for(int i=0;i<h;i++)
+        {
+            int j=0;
+            for(;j<w/2;j++)
+            {
+                swap(A[i][j],A[i][w-j-1]);        //水平翻转
+                A[i][j]   = invert(A[i][j]);    //值取反
+                A[i][w-j-1] = invert(A[i][w-j-1]);
+            }
+            if(0!=w%2)
+            {
+                A[i][j] = invert(A[i][j]);
+            }
+        }
+        return A;
+    }
+    bool swap(int& a, int& b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+        return true;
+    }
+    bool invert(int a)
+    {
+        if(a) return false;
+        else return true;
+    }
+};
+
+int main() {
+
+    Solution su;
+    vector<vector<int>> input ={{1,1,0},{1,0,1},{0,0,0}};
+    vector<vector<int>> output = su.flipAndInvertImage(input);
+    // 输出vetor<int>
+/*    for(int i=0;i<output.size();i++){
+        cout << output[i] << " ";
+    }
+*/
+    // 输出vector<vector<int>>
+    for(int i=0;i<output.size();i++){
+        for(int j=0;j<output[i].size();j++)
+        {
+            cout << output[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
