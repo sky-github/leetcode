@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+class Solution {
+public:
+    // 普通版本
+	/*vector<int> sortedSquares(vector<int>& A)
+	{
+		for (int i = 0; i < A.size(); i++)
+		{
+			A[i] = A[i] * A[i];
+		}
+		sort(A.begin(),A.end());
+
+		return A;
+	}*/
+	//双指针版本
+    vector<int> sortedSquares(vector<int>& A)
+    {
+        int n = A.size();
+        vector<int> result(n);  //定义输出
+        int i=0, j=n-1;          //定义左右指针
+        for(int p=n-1;p>=0;p--)
+        {
+            if(abs(A[i])<=abs(A[j]))
+            {
+                result[p] = A[j]*A[j];
+                j--;
+            }else
+            {
+                result[p] = A[i]*A[i];
+                i++;
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+
+    Solution su;
+    vector<int> input = {-7,-3,2,3,11};
+    vector<int> output = su.sortedSquares(input);
+    for(int i=0;i<output.size();i++){
+        cout << output[i] << " ";
+    }
+
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
